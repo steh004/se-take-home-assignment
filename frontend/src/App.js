@@ -10,8 +10,13 @@ function App() {
   const [status, setStatus] = useState({ pending: [], completed: [], bots: [] });
 
   const fetchStatus = async () => {
-    const res = await axios.get(`${API_BASE}/status`);
-    setStatus(res.data);
+    try {
+      const res = await axios.get(`${API_BASE}/status`);
+      setStatus(res.data);
+    } catch (err) {
+      console.error("Error fetching status:", err);
+      alert("Failed to fetch status from server.");
+    }
   };
 
   // get status every 3 second interval
@@ -22,18 +27,33 @@ function App() {
   }, []);
 
   const placeOrder = async (isVip) => {
-    await axios.post(`${API_BASE}/order`, { is_vip: isVip });
-    fetchStatus();
+    try {
+      await axios.post(`${API_BASE}/order`, { is_vip: isVip });
+      fetchStatus();
+    } catch (err) {
+      console.error("Error placing order:", err);
+      alert("Failed to place order.");
+    }
   };
 
   const addBot = async () => {
-    await axios.post(`${API_BASE}/bot`);
-    fetchStatus();
+    try {
+      await axios.post(`${API_BASE}/bot`);
+      fetchStatus();
+    } catch (err) {
+      console.error("Error adding bot:", err);
+      alert("Failed to add bot.");
+    }
   };
 
   const removeBot = async () => {
-    await axios.delete(`${API_BASE}/bot`);
-    fetchStatus();
+    try {
+      await axios.delete(`${API_BASE}/bot`);
+      fetchStatus();
+    } catch (err) {
+      console.error("Error removing bot:", err);
+      alert("No bots to remove or server error.");
+    }
   };
 
   return (

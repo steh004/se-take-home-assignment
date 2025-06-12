@@ -48,6 +48,11 @@ This is a simple Flask + React.js application that simulates a bot-driven order 
 ## 📦 Requirements
 
 Before starting, make sure you have **Python** and **Node.js** installed.
+Ensure the following versions are installed
+
+- Python 3.8 and above
+- Node.js v16 and above
+
 
 ### Install Python Libraries
 ```bash
